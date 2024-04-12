@@ -35,7 +35,6 @@ const Popularjobs = () => {
         ) : error ? (
           <Text>Something went wrong</Text>
         ) : (
-          // <Text>FlatList</Text>
           <FlatList
             data={data}
             renderItem={({ item }) => (
