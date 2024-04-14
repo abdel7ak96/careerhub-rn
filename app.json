@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "careerhub-rn",
-    "slug": "careerhub-rn",
+    "slug": "careerhub",
     "scheme": "com.careerhub.abdel7ak",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -30,6 +30,21 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ea997432-3277-4ba1-9874-a807b44e39fa"
+      }
+    },
+    "owner": "noisy96",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/ea997432-3277-4ba1-9874-a807b44e39fa"
+    }
   }
 }
