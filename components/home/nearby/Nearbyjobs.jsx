@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Pressable,
-  FlatList,
   ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
@@ -17,7 +16,6 @@ const Nearbyjobs = () => {
   const router = useRouter();
   const [selectedJob, setSelectedJob] = useState();
   const { data, isLoading, error, refetch } = useFetch('search', {
-    query: 'software algeria',
     num_pages: '1',
   });
 

@@ -28,6 +28,10 @@ const JobDetails = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
+  const { data, isLoading, error, refetch } = useFetch('job-details', {
+    job_id: params.id,
+  });
+
   const onRefresh = () => {};
 
   const displayTabContent = useCallback(() => {
@@ -57,10 +61,6 @@ const JobDetails = () => {
         return <Text>Something went wrong</Text>;
     }
   }, [data]);
-
-  const { data, isLoading, error, refetch } = useFetch('job-details', {
-    job_id: params.id,
-  });
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
