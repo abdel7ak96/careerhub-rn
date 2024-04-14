@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import {
   View,
   Text,
@@ -19,13 +19,44 @@ import {
 import { COLORS, icons, SIZES } from '../../constants';
 import useFetch from '../../hooks/useFetch';
 
+const tabs = ['About', 'Qualifications', 'Responsibilities'];
+
 const JobDetails = () => {
   const params = useLocalSearchParams();
   const router = useRouter();
 
   const [refreshing, setRefreshing] = useState(false);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const onRefresh = () => {};
+
+  const displayTabContent = useCallback(() => {
+    switch (activeTab) {
+      case tabs[0]:
+        return (
+          <JobAbout
+            info={data[0].job_description ?? ['N/A']}
+            benefits={data[0].job_highlights?.Benefits ?? ['N/A']}
+          />
+        );
+      case tabs[1]:
+        return (
+          <Specifics
+            title={tabs[1]}
+            points={data[0].job_highlights?.Qualifications ?? ['N/A']}
+          />
+        );
+      case tabs[2]:
+        return (
+          <Specifics
+            title={tabs[2]}
+            points={data[0].job_highlights?.Responsibilities ?? ['N/A']}
+          />
+        );
+      default:
+        return <Text>Something went wrong</Text>;
+    }
+  }, [data]);
 
   const { data, isLoading, error, refetch } = useFetch('job-details', {
     job_id: params.id,
@@ -72,12 +103,17 @@ const JobDetails = () => {
                 companyName={data[0].employer_name}
                 location={data[0].job_country}
               />
-              <JobTabs />
+              <JobTabs
+                tabs={tabs}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+              />
+              {displayTabContent()}
             </View>
           )}
         </ScrollView>
+        <JobFooter url={data[0]?.job_google_link} />
       </>
-      <ScrollView></ScrollView>
     </SafeAreaView>
   );
 };
